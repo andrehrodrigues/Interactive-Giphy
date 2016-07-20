@@ -1,0 +1,61 @@
+<head>
+  <title>Giphy - Sandro Miccoli</title>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-sm-9">
+
+        </div>
+        <div class="col-sm-3 paddingRight" >
+            <h3>Teste</h3>
+            {{>addPedido}}
+            {{>pedidosLista}}
+        </div>
+    </div>
+
+</body>
+
+<template name="addPedido">
+    <form id="adicionarLivro">
+        <div class="form-group">
+            <label for="Pedido">Título</label>
+            <input type="text" name="pedido" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-success">Send</button>
+    </form>
+</template>
+
+<template name="pedidosLista">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Request</th>
+            <th>Remove?</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each pedidos}}
+            {{>pedido}}
+        {{/each}}
+        </tbody>
+    </table>
+
+</template>
+
+<template name="pedido">
+    <tr>
+        <td><input type="text" name="loja" class="form-control" value="{{pedido}}"></td>
+        <td>
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-danger cancelar" id="btnCancel" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+        </td>
+    </tr>
+
+</template>
