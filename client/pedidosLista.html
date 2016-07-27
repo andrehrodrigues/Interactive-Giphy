@@ -1,0 +1,17 @@
+<template name="pedidosLista">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Request</th>
+            <th>Remove?</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each pedidos}}
+            {{>pedido}}
+        {{/each}}
+        </tbody>
+    </table>
+
+</template>
