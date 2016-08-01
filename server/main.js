@@ -8,9 +8,13 @@ import  { Pedidos } from '../imports/api/pedidos/pedidos';
 Meteor.startup(() => {
   // code to run on server at startup
 
-    var countdown = new ReactiveCountdown(30);
+    if(Pedidos.find().count() === 0) {
+        insertTrendingGifs();
+    }
 
-    countdown.start(function(){
+    var countdownWord = new ReactiveCountdown(85);
+
+    countdownWord.start(function(){
 
         let ped = Pedidos.findOne();
 
@@ -22,10 +26,54 @@ Meteor.startup(() => {
             }
         });
 
-        countdown.start();
+        if(Pedidos.find().count() === 0){
+            insertTrendingGifs();
+        }
 
+        countdownWord.start();
+    });
+
+
+
+    var countdownGif = new ReactiveCountdown(10);
+
+    countdownGif.start(function(){
+
+        let ped = Pedidos.findOne();
+        console.log(ped.gifs.length);
+        let gif = ped.gifs[0];
+
+        Meteor.call('pedidos.removeGif', ped._id, gif , (error) => {
+            if (error) {
+                alert(error.reason);
+            } else {
+
+            }
+        });
+
+        countdownGif.start();
     });
 
 
 
 });
+
+function insertTrendingGifs(){
+
+    Meteor.call('searchTrendingGifs', (error, result)=>{
+        const pedido = {
+            pedido: "Trending",
+            gifs: result
+        }
+
+        Meteor.call('pedidos.insert', pedido, (error) => {
+            if (error) {
+                alert(error.reason);
+            } else {
+
+            }
+        });
+
+    });
+
+}

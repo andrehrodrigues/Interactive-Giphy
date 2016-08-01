@@ -25,6 +25,13 @@ Meteor.methods({
                 console.log(error);
             }
         });
+    },
+    'pedidos.removeGif' (pedidoId,gifUrl) {
+        Pedidos.update({_id:pedidoId},{$pull : {gifs : gifUrl}}, (error) => {
+            if (error){
+                console.log(error);
+            }
+        });
     }
 });
 

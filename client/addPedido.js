@@ -11,6 +11,8 @@ let template;
 
 Template.addPedido.onCreated(function () {
 
+
+
 });
 
 Template.addPedido.helpers({
@@ -42,11 +44,23 @@ Template.addPedido.events({
         //
         // );
 
-        const pedido = {
-            pedido: template.find('[name="pedido"]').value.trim(),
-        };
+        let ped = template.find('[name="pedido"]').value.trim();
+        var gifs= [];
 
-        if (pedido.pedido!== '') {
+        Meteor.call('searchGifsByPhrase', ped,(error, result)=> {
+            console.log("GIFS");
+            console.log(result);
+            gifs = result;
+
+            const pedido = {
+                pedido: ped,
+                gifs: gifs
+            };
+
+            console.log("Pedido");
+            console.log(pedido);
+
+
             Meteor.call('pedidos.insert', pedido, (error) => {
                 if (error) {
                     alert(error.reason);
@@ -54,6 +68,22 @@ Template.addPedido.events({
                     template.find('form').reset();
                 }
             });
+
+        });
+
+
+        if (pedido.pedido!== '') {
+
+
+
+
+            // Meteor.call('pedidos.insert', pedido, (error) => {
+            //     if (error) {
+            //         alert(error.reason);
+            //     } else {
+            //         template.find('form').reset();
+            //     }
+            // });
         } else {
             alert('Escolha uma palavra a ser buscada!.');
         }

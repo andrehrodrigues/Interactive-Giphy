@@ -5,6 +5,8 @@ import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
 
 import './pedido.html';
+import './pedidosLista.html';
+import './pedidosLista';
 import  { Pedidos } from '../imports/api/pedidos/pedidos';
 
 let template;

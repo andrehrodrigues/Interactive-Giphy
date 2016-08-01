@@ -22,6 +22,6 @@ Template.giphytv.onCreated(function helloOnCreated() {
 
 Template.giphytv.helpers({
     'pedido':()=>{
-        return template.primeiroPedido().pedido;
+        return template.primeiroPedido().gifs[0];
     },
 });

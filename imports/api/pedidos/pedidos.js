@@ -9,7 +9,11 @@ Pedidos.schema = new SimpleSchema({
 
     pedido: {
         type: String
+    },
+    gifs:{
+        type: [String]
     }
+
 });
 Pedidos.attachSchema(Pedidos.schema);
 
